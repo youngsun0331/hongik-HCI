@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HTML5 문서구조시맨틱태그사용</title>
+<style>
+    html, body{ margin: 0; padding: 0; height: 100%; }
+    header { width: 100%; height: 15%; 
+    background: yellow; }
+    nav{ width: 15%; height: 70%; float: left; 
+    background: orange; }
+    section { width: 70%; height: 70%; float: left; 
+    background: olivedrab; }
+    aside { width: 15%; height: 70%; float: left; 
+    background: orange; }
+    footer { width: 100%; height: 15%; clear: both; 
+    background: plum; }
+</style>
+</head>
+<body>
+    <header>
+        <h1>볼프강아마데우스모차르트</h1>
+        <p>모차르트(1756년1월27일~ 1791년12월5일)는1756년1월27일잘츠부르크에서태어난천재적인오스트리아의작곡가를소개한다.</p>
+        <details>
+            <summary>1770년대 초상화</summary>
+            <figure>
+                <img width="70" height="40" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wolfgang-amadeus-mozart_1.jpg/500px-Wolfgang-amadeus-mozart_1.jpg">
+                
+            </figure>
+        </details>    
+        
+    </header>
+    <nav>
+        <h2>목차</h2>
+        <ul>
+        <li><a href="inside.html#life"  target=middle>생애</a></li>
+        <li><a href="inside.html#death" target=middle>죽음</a></li>
+        <li><a href="inside.html#music" target=middle>음악</a></li>
+        </ul>
+    </nav>
+    <section>
+        <iframe src="inside.html" width=100% height=100% name="middle">
+
+        </iframe>
+    </section>
+    <aside id="legend">
+    <h3>모차르트의죽음에얽힌전설</h3>
+    <p>모차르트의장례식날비가오고천둥이쳤다고하나New Groove에따르면사실은구름한점없는쾌청한날이었다고한다.</p>
+    </aside>
+    <footer> 2026년 3월 20일 이영선&copy </footer>
+</body
