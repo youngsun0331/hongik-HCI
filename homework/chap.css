@@ -28,18 +28,30 @@ section{
 
 }
 
- table{ border-collapse : collapse; }  /*이중선 제거*/
- th,td{
+table{ border-collapse : collapse; }  
+th,td{
       width: 300px;
       height: 50%;
       text-align: center;
       border: 1px solid #000;
       
-      vertical-align: top;	/* 위 */
-      vertical-align: bottom;   /* 아래 */
-      vertical-align: middle;   /* 가운데 */
+      vertical-align: top;	
+      vertical-align: bottom;   
+      vertical-align: middle;   
     }
-
+thead { /* <thead>의 모든 셀 적용 */
+background : darkgray;
+color : yellow;
+}
+td, tfoot th { /* 아래쪽 테두리만 회색 */
+border-bottom : 1px solid gray
+}    
+tbody tr:nth-child(even) { /* 짝수 <tr>에 적용*/
+background : aliceblue;
+}
+tbody tr:nth-child(odd) { /* 짝수 <tr>에 적용*/
+background : rgb(95, 176, 247);
+}
 nav{
     display: inline-block;
     background-color: rgb(181, 128, 128);
@@ -53,7 +65,7 @@ nav{
 nav ol {
     position: fixed;
     bottom: 20px;
-    right: 150px;
+    right: 20px;
 }
 nav a {
     text-decoration: none;
@@ -61,3 +73,8 @@ nav a {
 nav a:hover {
     color: aqua;
 }
+
+
+#section h2 { color: navy; }
+.important-text { font-weight: bold; }
+ul > li { color: #333; }
