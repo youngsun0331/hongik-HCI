@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="chap2.css">
+        <meta charset="utf-8">
+        <title>HCI Chater2</title>
+    </head>
+    <body>
+  
+            <header>
+                <h2>2장 HTML 기본문서 만들기</h2>
+                chap.css 파일 , 메뉴 3~4개 표 , ol, ul,dl,img,4종류 셀렉터,
+                cascading+overriding
+            </header>
+        <div class="box">
+            <section>
+                <h2 id="one">2장에서 학습한 태그
+                </h2>
+                <table>
+                    <tr>
+                        <th>분류</th>
+                        <th>태그</th>
+                    </tr>
+                    <tr>
+                        <td>문서 기본 태그</td>
+                        <td>&lt;hmlt&gt; , &lt;head&gt;,&lt;title&gt;,&lt;bodt&gt;,
+                            &lt;h1&gt;~&lt;h6&gt;,&lt;p&gt;,&lt;hr&gt;,&lt;br&gt;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>텍스트 꾸미기 태그</td>
+                        <td>&lt;b&gt; &lt;string&gt; &lt;em&gt; &lt;i&gt; &lt;small&gt; &lt;del&gt;
+                             &lt;ins&gt; &lt;sup&gt; &lt;sub&gt; &lt;mark&gt;
+                        </td>
+                    </tr>       
+                    <tr>
+                        <td>블록과 링크 태그</td>
+                        <td>&lt;pre&gt; &lt;div&gt; &lt;span&gt; &lt;a&gt; &lt;iframe&gt;
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>메타 태그</td>
+                        <td>&lt;base&gt; &lt;link&gt; &lt;script&gt; &lt;style&gt; &lt;meta&gt; &lt;title&gt;
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>이미지와 리스트</td>
+                        <td>&lt;img&gt; &lt;ol&gt; &lt;ul&gt; &lt;dl&gt; &lt;li&gt; &lt;dt&gt; &lt;dd&gt;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>표 태그</td>
+                        <td>&lt;table&gt; &lt;caption&gt; &lt;thead&gt; &lt;tbody&gt; &lt;tfoot&gt; &lt;tr&gt; &lt;th&gt; &lt;td&gt;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>미디어</td>
+                        <td>&lt;audio&gt; &lt;video&gt; &lt;embed&gt; &lt;object&gt;
+                        </td>
+                    </tr>
+                </table>
+                
+                <h2 id="two">기초적인 hmtl 태그들</h2>
+                <br>
+                (cascading)html, head title body 태그
+                !DOCTYPE html - html 문서임을 알리는 지시어
+                <br>
+                <br>
+
+                <h2 id="three">블록 태그와 인라인 태그</h2>
+                          <br>
+                블록태그 - 항생 새 라인에서 시작해서 출력
+                인라인 태그 - 블록 속에 삽이되어 블록 일부로 출력
+                          <br>          <br>
+
+
+                <h2 id="four">이미지 삽입하기</h2>
+                          <br>          <br>    
+                
+                <img src="img.png" alt="이미지">
+                    <img src="null.png" alt="이미지가 없을경우 이렇게 출력됩니다">
+                
+                          <br>          <br>
+                <h2 id="fi">리스트 만들기</h2>
+                          <br>
+                3가지 종류의 리스트
+                <ol>순서가 있는 리스트
+                    <li>첫번째</li>
+                    <li>두번째</li>
+                    <li>세번째</li>
+                </ol>
+                <ul>
+                    순서가 없는 리스트
+                    <li>순서가 없기 때문에</li>
+                    <li>점으로 표시 됩니다</li>
+                        <ol>
+                            <li>리스트는 중첩이 가능합니다
+                            <li>종류와 상관 없이 가능합니다</li>
+                        </ol>
+                </ul>
+                <dl>정의 리스트
+                    <dt>정의 할 용어</dt>
+                    <dd>설명을 적을 수 있습니다</dd>
+                </dl>
+
+            </section>
+            <nav>
+                <ol>
+                    <li><a href="#one">2장에서 학습한 태그</a></li>
+                    <li><a href="#two">기초적인 hmtl 태그들</a></li>
+                    <li><a href="#three">블록 태그와 인라인 태그</a></li>
+                    <li><a href="#four">이미지 삽입하기</a></li>
+                    <li><a href="#fi">리스트 만들기</a></li>
+                </ol>
+            </nav>
+        </div>
+    </body>
+</html>
