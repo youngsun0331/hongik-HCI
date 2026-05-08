@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HW2 연습 C311215 이영선</title>
+    <style>
+       
+       
+       .completed { 
+            text-decoration: line-through; 
+            color: #aaa !important; /* 줄이 그어지면 회색으로 변경 */
+        }
+
+        .account-item{
+            background: white;
+            border-radius: 8px;
+            border-top: 8px solid #99ff66; 
+            margin-bottom: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+        
+        }
+
+        #addedList { margin-top: 15px; padding: 10px; min-width: 300px; }
+    </style>
+    <script>
+        let accountList = [];
+
+        // 계좌 추가 함수
+        function addAccount() {
+            const idval = document.getElementById("owner").value.trim();
+            const codeval = document.getElementById("code").value.trim();
+            const balanceval = document.getElementById("balance").value.trim();
+
+            if (!idval || !codeval || !balanceval) {
+                alert("모든 필드를 입력해주세요!");
+                return;
+            }
+
+            // 모든 기존 항목의 '신규' 상태를 해제
+            accountList.forEach(acc => acc.isNew = false);
+
+            const acc = {
+                id: idval,
+                code: codeval,
+                balance: Number(balanceval),
+                isActive: true, // 줄 긋기 상태 확인용 (기본값: 활성)
+                isNew: true     // 새로 추가된 항목인지 확인용
+            };
+
+            accountList.push(acc);
+
+            updateStatistics();
+            renderAccountList();
+
+            // 입력 필드 초기화
+            document.getElementById("owner").value = "";
+            document.getElementById("code").value = "";
+            document.getElementById("balance").value = "";
+        }
+
+        // 클릭 시 상태 토글 (줄 긋기 및 통계 반영)
+        function toggleAccount(index) {
+            accountList[index].isActive = !accountList[index].isActive;
+            updateStatistics();
+            renderAccountList();
+        }
+
+        // 통계 업데이트 함수 (활성화된 계좌만 계산)
+        function updateStatistics() {
+            const totalAccountsEl = document.getElementById("total-count");
+            const totalBalanceEl = document.getElementById("total-balance");
+            
+            // 전체 계좌 수 (줄 그어진 것 포함)
+            totalAccountsEl.textContent = accountList.length;
+
+            // 줄이 그어지지 않은(isActive: true) 계좌만 합산
+            const totalBalance = accountList
+                .filter(acc => acc.isActive)
+                .reduce((sum, account) => sum + account.balance, 0);
+            
+            totalBalanceEl.textContent = totalBalance.toLocaleString();
+        }
+
+        // 목록 렌더링 함수
+        function renderAccountList() {
+            const addedList = document.getElementById("addedList");
+            addedList.innerHTML = "";
+
+            accountList.forEach((account, index) => {
+                const item = document.createElement("div");
+                item.className = "account-item";
+                
+                // 줄 긋기 클래스 적용
+                if (!account.isActive) item.classList.add("completed");
+                
+
+
+                item.innerHTML = `<strong>${index + 1}.</strong> ${account.id} | 계좌: ${account.code} | 잔액: ${account.balance.toLocaleString()}원`;
+                if (!account.isActive){
+                    item.innerHTML += `<button>취소</button>`;
+                } else {
+                    item.innerHTML += `<button>줄 긋기</button>`;
+                }
+                
+                
+                item.onclick = () => toggleAccount(index);
+                
+                addedList.appendChild(item);
+            });
+        }
+
+        // 이름순 정렬 함수
+        function sortByName() {
+            if (accountList.length === 0) return;
+            accountList.sort((a, b) => a.id.localeCompare(b.id));
+            
+            renderAccountList();
+        }
+
+        window.onload = function() {
+            document.getElementById("sortByname").onclick = sortByName;
+        };
+    </script>
+</head>
+
+<body>
+    <h2>HW2 실습</h2>
+    <hr>
+    
+    <h2>통계</h2>
+    <p>총 등록 계좌 : <span id="total-count">0</span> 개</p>
+    <p>실제 잔고 합계 : <strong id="total-balance" >0</strong> 원</p>
+    
+    
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>계좌이름</th>
+                <th>계좌코드</th>
+                <th>잔액</th>
+                <th>작업</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" id="owner" placeholder="이름"></td>
+                <td><input type="text" id="code" placeholder="코드"></td>
+                <td><input type="number" id="balance" placeholder="잔액"></td>
+                <td><button type="button" onclick="addAccount()">등록</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <hr>
+    
+    <h3>계좌 목록</h3>
+    <button id="sortByname">이름순 정렬</button>
+    <div id="addedList"></div>
+</body>
+</html>

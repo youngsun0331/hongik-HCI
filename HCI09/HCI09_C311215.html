@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HCI9장 실습 1</title>
+</p>
+
+<hr>
+<!-- 이벤트 리스너로 등록법 3가지
+ 태그 내부에 호출
+ 돔 객체의 이벤트 리스너 프로퍼티에 작성
+ 돔 객체의 addEventListener 메소드
+ -->
+<script>
+    let p;
+    let p2;
+    let p3;
+    function init() {
+        p = document.getElementById("p");
+        p.onmouseover = over;
+        p.onmouseout = out;
+        
+        p2 = document.getElementById("p2");
+        p2.addEventListener("mouseover", over2);
+        p2.addEventListener("mouseout",out2);
+
+        p3 = document.getElementById("p3");
+        p3.onmouseover = function(){
+            this.style.backgroundColor ="orchid";
+        };
+        p3.addEventListener("mouseout",
+            function () {this.style.backgroundColor="white";}//익명함수
+        )
+    }
+
+    function over() {
+        p.style.backgroundColor="blue";
+    }
+    function out() {
+        p.style.backgroundColor="white";
+    }
+
+   function over2() {
+        p2.style.backgroundColor="blue";
+    }
+    function out2() {
+        p2.style.backgroundColor="white";
+    }
+</script>
+</head>
+<body onload="init()">
+    <h4> C311215 이영선 &copy;</h4>
+<p>HTML 태그에 리스너 작성</p>
+<hr>
+<p 
+onmouseover="this.style.backgroundColor='orchid'"
+onmouseout="this.style.backgroundColor='white'"
+>
+    마우스를 올리면 orchid 색으로 변경 </p>
+    <hr>
+
+    <p id="p"> 마우스 올리면 blue 색으로 변경</p>
+
+
+    <hr>
+    addEventListener를 이용하는 방법
+    <p id="p2">마우스를 올리면 blue 색으로 변경</p>
+
+
+    <hr>
+    익명 함수로 이벤트 리스너 작성
+    <p id="p3"> 마우스 올리면 orchid 색으로 변경</p>
+
+
+
+    <hr>
+
+   
+    <button onclick="f(event)">클릭해보세요</button>
+    <p id="ppx" > 이곳에 마우스를 올려보시오 현재 작동 안 되게 막아둠</p>
+   <script>
+        function f(e) {
+            alert(e.type);
+        }
+        
+        document.getElementById("pp").onmouseover =f;
+    </script>
+
+
+
+    <button onclick="ff(event)">버튼을 클릭해보세요~</button>
+    <p id="te"> 버튼을 클릭하면 이벤트 객체를 출력합니다</p>
+
+    <script>
+        function ff(e){
+  
+            let text = "type: " + e.type+ "<br>"
+                    + "target : " + e.target+"<br>"
+                    + "currentTarget :" + e.currentTarget +"<br>"
+                    + "defaultPrevented: " + e.defaultPrevented;
+            let pp = document.getElementById("te");
+            pp.innerHTML = text;
+
+        }
+    </script>
+
+
+    <script>
+        function query() {
+            let ret = confirm("네이버로 이동하시겠습니까?");
+            return ret;
+        }
+
+    </script>
+    <h3> 이벤트의 디폴트 행동 취소</h3>
+    <hr>
+    <a href="http://www.naver.com" onclick="return query()">
+        네이버로 이동할지 말지 확인하는 링크
+    </a>
+
+
+    <h3>이벤트 흐름</h3>
+    <p style="color:blue">이것은
+        <span style="color:red"> 문장입니다</span>
+    </p>
+
+   <form>
+<input type="text" name="s">
+<input type="button" value="테스트" id="button">
+<hr>
+</form>
+<div id="div" style="color:green"></div>
+<script>
+let div = document.getElementById("div"); // 이벤트 메시지 출력 공간
+let button = document.getElementById("button");
+// body 객체에 캡쳐 리스너 등록
+document.body.addEventListener("click", capture, true); // 켭쳐 단계(1)
+// 타겟 객체에 버블 리스너 등록
+button.addEventListener("click", bubble, false); // 버블 단계(2)
+// body 객체에 버블 리스너 등록
+document.body.addEventListener("click", bubble, false); // 버블 단계(3)
+function capture(e) { // e는 이벤트 객체
+let obj = e.currentTarget; // 현재 이벤트를 받은 DOM 객체
+let tagName = obj.tagName; // 태그 이름
+div.innerHTML += "<br>capture 단계 : " + tagName + " 태그" + e.type + "이벤트";
+}
+function bubble(e) { // e는 이벤트 객체
+let obj = e.currentTarget; // 현재 이벤트를 받은 DOM 객체
+let tagName = obj.tagName; // 태그 이름
+div.innerHTML += "<br>bubble 단계 : " + tagName + " 태그" + e.type + "이벤트";
+}
+</script>
+
+
+
+    <script>
+    function calculate() {
+    let exp = document.getElementById("exp");
+    let result = document.getElementById("result");
+    result.value = eval(exp.value);
+    }
+    </script>
+    <h3> onclick, 계산기 만들기</h3>
+    <hr>
+    계산하고자 하는 수식을
+    입력하고 계산 버튼을 눌러봐요.’
+    <br><br>
+    <form>
+    식 <input type="text" id="exp" value=""><br>
+    값 <input type="text" id ="result">
+    <input type="button" value=" 계산"
+    onclick="calculate()">
+    </form>
+
+
+</body>
+</html> 
