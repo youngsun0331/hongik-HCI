@@ -4,21 +4,50 @@
     <meta charset="UTF-8">
     
     <title>HCI Homework2</title>
-    <link rel="stylesheet" href="hw2.css">
+  
     <script src="hw2.js"></script>
 </head>
 <body>
     <header>
-
+        <h1>오늘 할 일: <span id="today-date"></span></h1>
     </header>
     
     <section>
-        <div>박스박스</div>
-        <button onclick="t()">테스트</button>
+        <h2>통계</h2>
+        <div  class="sti">
+        오늘 할 일 : <br>
+        완료 한 일 : <br>
+        남은 할 일 :</div
     </section>
-
+    <section>
+        <h2>할 일 입력</h2>
+        <div  class ="input">
+       
+            <table>
+                <thead>
+                    <tr><th>제목</th><th>시간</th><th>중요도</th><th></th></tr>
+                    </thead>
+                <tbody>
+                    <tr>
+                    <td><input type="text" id="owner" placeholder="예: 프로그램H2작성"></td>
+                    <td><input type="time" id="time" ></td>
+                    <td><input type="number" id="balance" min="1" max="5" step="1" value="3"></td>
+                    <td><button id="addBtn">할 일 추가</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section>
+        <h2>할 일 목록</h2>    
+        <button id="sortOwnerBtn" type="button">중요도순 정렬</button>
+        <button id="sortOwnerBtn" type="button">시간순 정렬</button>
+    </section>
     <footer>
 
     </footer>
 </body>
+
+
+    
 </html>
