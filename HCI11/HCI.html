@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>원호 그리기</title>
+</head>
+<body>
+    <h3>C311215,이영선, &copy;원호 그리기</h3>
+    <hr>
+    
+    <!-- 첫 번째 캔버스 영역 -->
+    <canvas id="myCanvas" style="background-color:aliceblue" width="200" 
+    height="500"></canvas>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let context = canvas.getContext("2d");
+        
+        context.beginPath(); 
+        context.strokeStyle="magenta";
+        context.arc(100, 70, 30, 0, 1.5*Math.PI, false); 
+        context.stroke(); 
+        
+        context.beginPath(); 
+        context.strokeStyle="blue";
+        context.arc(100, 70, 50, Math.PI/2, Math.PI, true); 
+        context.stroke(); 
+
+        // 10픽셀의 yellowgreen 사각형 그리기
+        context.beginPath();
+        context.rect(20, 180, 120, 50); 
+        context.lineWidth = 10;
+        context.strokeStyle = "yellowgreen";
+        context.stroke(); 
+
+        context.beginPath();
+        context.arc(80,350,50,0,1.5*Math.PI, false);
+        context.lineWidth=20;
+        context.strokeStyle ="violet";
+        context.stroke();
+    </script>
+
+
+    <!-- 두 번째 캔버스 영역 -->
+    <canvas id="meCanvas" style="background-color:aliceblue"
+     width="200" height="500"></canvas>
+
+    <script>
+        // 변수명을 canvas2, context2로 변경하여 충돌 방지
+        let canvas2 = document.getElementById("meCanvas");
+        let context2 = canvas2.getContext("2d");
+
+        context2.beginPath();
+        context2.strokeStyle="magenta";
+        context2.arc(100,70,30,0,1.5*Math.PI,false); 
+        context2.stroke(); 
+
+        context2.beginPath();
+        context2.strokeStyle="magenta";
+        context2.arc(100,70,10,0,2*Math.PI,false); 
+        context2.stroke();
+
+        context2.beginPath();
+        context2.strokeStyle="blue";
+        context2.arc(100,170,50,Math.PI/2, Math.PI, true); 
+        context2.stroke();
+
+
+        context2.fillStyle="violet";
+        context2.rect(100,280,100,100);
+        context2.fill();
+        context2.strokeStyle = "gray";
+        context2.lineWidth = 10;
+        context2.stroke();
+    </script>
+
+    <h2> (20,20) 에 100x200 크기로 그리기</h2>
+    <hr>
+    <canvas id ="MyCanvas3" style="background-color:aliceblue"
+    width = "300" height = "300";
+
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>마우스 드래깅으로 캔버스에 그림 그리기</title></head>
+<body onload="init()">
+<h3>C311215 , 이영선</h3>
+<h3>마우스를 누른 채 드래깅하여 그림 그려 보세요</h3>
+<hr>
+    도구 : 
+    <button type="button" id = "pen" onclick="setTool('pen')">
+    <img src="pen.png"width="30px" height="30px" alt="연필"><span></span>
+    </button>
+    <button id="rect" onclick="setTool('rect')">
+    <img src="rect.png"width="30px" height="30px" alt="사각형"><span></span>
+    </button>
+    <button type="button" id="circle" onclick="setTool('circle')">
+        <img src="circle.png" width="30px" height="30px" alt="원"><span></span>
+    </button>
+    <button type="button" id="text" onclick="setTool('text')">
+        <img src="text.png" width="30px" height="30px" alt="텍스트"><span></span>
+    </button>
+    <br><br>
+
+
+    선 색 : <input type="color"> 채우기 색 : <input type="color"> 
+    선굵기 : <input type="number"> 채우기 <input type="checkbox">
+    <br><br>
+    텍스트 : <input type="text"> 글자크기 <input type="number">
+    <button type="button" onclick="clearCanvas()">캔버스 지우기
+    </button>
+    <br></br>
+    현재 도구 :     마우스 좌표 : 
+<hr>
+
+<canvas id="myCanvas" style="background-color:aliceblue" width="400" height="300">
+</canvas>
+<script>
+    let canvas, context;
+    let startX=0, startY=0; // 드래깅동안, 처음 마우스가 눌러진 좌표
+    let dragging=false;
+    let tool = "pen"
+    let oldtool = "pen";
+    let imageData;
+    document.getElementById("pen").querySelector("span").textContent ="selected";
+    function setTool(t) {
+        tool = t;
+
+        //선택된 tool name을 msg 작성 처리
+        //클릭해서 새로 선택된 도구 이미지+문자로 수정
+        document.getElementById(tool).querySelector("img").src = tool + "_selected.png";
+        document.getElementById(tool).querySelector("span").textContent = "selected";
+
+        if (oldtool != tool)
+        { //선택 해제 된 버튼의 이미지+no문자로 수정
+            document.getElementById(oldtool).querySelector("img").src = oldtool + ".png";
+            document.getElementById(oldtool).querySelector("span").textContent = "";
+            oldtool = tool;
+        }
+    }
+
+    function init() {
+        canvas = document.getElementById("myCanvas");   
+        context = canvas.getContext("2d");
+        context.lineWidth = 2; // 선 굵기 2
+        context.strokeStyle = "blue";
+        context.fillStyle = "Yellow";
+        canvas.addEventListener("mousemove", function (e) { move(e) }, false);
+        canvas.addEventListener("mousedown", function (e) { down(e) }, false);
+        canvas.addEventListener("mouseup", function (e) { up(e) }, false);
+        canvas.addEventListener("mouseout", function (e) { out(e) }, false);
+    }
+
+
+    function draw(curX, curY) {
+        context.beginPath();
+        context.moveTo(startX, startY);
+        context.lineTo(curX, curY);
+        context.stroke();
+    }
+    
+    function drawRect(curX, curY){
+        let w = curX - startX;
+        let h = curY - startY;
+
+        context.beginPath();
+        context.rect(startX,startY,w,h);
+        context.stroke();
+        context.fill();
+    }
+
+    function drawCircle(curX,curY){
+        let w = curX - startX;
+        let h = curY - startY;
+
+        context.beginPath();
+        context.strokeStyle="blue";
+        context.arc(w, h, 50, 0, Math.PI*2, true); 
+        context.stroke(); 
+    }
+    
+
+    function down(e) {
+        startX = e.offsetX; 
+        startY = e.offsetY;
+        imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        dragging = true;
+        }
+
+    function up(e) { 
+
+        if(!dragging) return;
+        let curX = e.offsetX;
+        let curY = e.offsetY;
+        if(tool == "rect") {
+   
+            context.putImageData(imageData, 0, 0);
+            drawRect(curX, curY);
+        }  
+
+        dragging = false;
+
+    }
+    function move(e) {
+        if(!dragging) return; // 마우스가 눌러지지 않았으면 리턴
+        let curX = e.offsetX
+        let curY = e.offsetY;
+        if(tool == "pen"){
+            draw(curX, curY);
+            startX = curX; startY = curY;
+        } else if (tool == "rect"){
+            context.putImageData(imageData,0,0);
+            drawRect(curX,curY);
+        } else if (tool == "circle") {
+            context.putImageData(imageData,0,0);
+            drawCircle(curX,curY);
+        }
+  
+    }
+    function out(e) { dragging = false; }
+    function clearCanvas() {
+    // 캔버스의 왼쪽 위(0,0)부터 오른쪽 아래 끝까지 전체 영역을 지웁니다.
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+
+</script>
+</body>
+</html>
